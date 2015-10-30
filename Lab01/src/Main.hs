@@ -43,10 +43,14 @@ getPosition (Player pt) = pt
 getPosition (Chest pt) = pt
 
 takesome :: Int -> [a] -> [a]
-takesome n = id
+takesome _ [] = []
+takesome 0 _ = []
+takesome n (x:xs) = x : takesome (n-1) xs
 
 dropsome :: Int -> [a] -> [a]
-dropsome n = id
+dropsome _ [] = []
+dropsome 0 xs = xs
+dropsome n (_:xs) = dropsome (n-1) xs
 
 chunksOf :: Int -> [a] -> [[a]]
 chunksOf n [] = []
@@ -57,7 +61,7 @@ createMap w h c =
   Map w h (chunksOf w $ map (read . (:[])) c)
 
 distance :: Point -> Point -> Int
-distance _ _ = 42
+distance (x1,y1) (x2,y2) = abs(x1-x2) + abs(y1-y2) 
 
 {- Reading and Showing Tiles and Objects -}
 
