@@ -43,14 +43,10 @@ getPosition (Player pt) = pt
 getPosition (Chest pt) = pt
 
 takesome :: Int -> [a] -> [a]
-takesome _ [] = []
-takesome 0 _ = []
-takesome n (x:xs) = x : takesome (n-1) xs
+takesome _ = id -- not correct, FIX
 
 dropsome :: Int -> [a] -> [a]
-dropsome _ [] = []
-dropsome 0 xs = xs
-dropsome n (_:xs) = dropsome (n-1) xs
+dropsome _ = id -- not correct, FIX
 
 chunksOf :: Int -> [a] -> [[a]]
 chunksOf n [] = []
@@ -61,7 +57,7 @@ createMap w h c =
   Map w h (chunksOf w $ map (read . (:[])) c)
 
 distance :: Point -> Point -> Int
-distance (x1,y1) (x2,y2) = abs(x1-x2) + abs(y1-y2) 
+distance _ _ = 42 -- not correct, FIX
 
 {- Reading and Showing Tiles and Objects -}
 
@@ -81,7 +77,7 @@ instance Show Object where
 
 {- Handle a key press from the player -}
 
-handleInput :: Char -> Scene -> Scene
+handleInput :: Char -> Scene -> Scene -- uses wasd, needs to use ijkl
 handleInput 'w' (Scene map (Player (x, y)) objects) = (Scene map (Player (x, (y-1))) objects)
 handleInput 'a' (Scene map (Player (x, y)) objects) = (Scene map (Player ((x-1), y)) objects)
 handleInput 's' (Scene map (Player (x, y)) objects) = (Scene map (Player (x, (y+1))) objects)
