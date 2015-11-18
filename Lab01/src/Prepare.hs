@@ -1,4 +1,4 @@
-module Prepare where
+module Main where
 import Data.Char
 
 {- extract dropsome, takesome, distance and handleInput, and bundle them -}
