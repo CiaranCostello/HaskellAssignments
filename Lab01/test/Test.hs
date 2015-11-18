@@ -25,7 +25,7 @@ deriving instance Eq Tile
 
 chunksOf :: Int -> [a] -> [[a]]
 chunksOf n [] = []
-chunksOf n l = (takesome n l):(chunksOf n (dropsome n l))
+chunksOf n l = (take n l):(chunksOf n (drop n l))
 
 createMap :: Int -> Int -> String -> Map
 createMap w h c =
