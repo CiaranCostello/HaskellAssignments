@@ -60,7 +60,7 @@ test_movement_left =
                "#..#" ++
                "####"
       theScene = (Scene (createMap 4 3 theMap) (Player (2,1)) [])
-      expectedScene = (Scene (createMap 3 4 theMap) (Player (1,1)) [])
+      expectedScene = (Scene (createMap 4 3 theMap) (Player (1,1)) [])
   in
     expectedScene @=? (handleInput 'j' theScene)
 
@@ -69,7 +69,7 @@ test_movement_right =
                "#..#" ++
                "####"
       theScene = (Scene (createMap 4 3 theMap) (Player (1,1)) [])
-      expectedScene = (Scene (createMap 3 4 theMap) (Player (2,1)) [])
+      expectedScene = (Scene (createMap 4 3 theMap) (Player (2,1)) [])
   in
     expectedScene @=? (handleInput 'l' theScene)
     
