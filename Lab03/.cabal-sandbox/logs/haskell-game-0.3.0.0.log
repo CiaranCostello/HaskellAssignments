@@ -1,0 +1,33 @@
+Configuring haskell-game-0.3.0.0...
+Building haskell-game-0.3.0.0...
+Preprocessing library haskell-game-0.3.0.0...
+In-place registering haskell-game-0.3.0.0...
+Preprocessing executable 'haskell-game' for haskell-game-0.3.0.0...
+
+on the commandline: Warning:
+    -XOverlappingInstances is deprecated: instead use per-instance pragmas OVERLAPPING/OVERLAPPABLE/OVERLAPS
+
+on the commandline: Warning:
+    -XOverlappingInstances is deprecated: instead use per-instance pragmas OVERLAPPING/OVERLAPPABLE/OVERLAPS
+Linking dist/dist-sandbox-dd38424a/build/haskell-game/haskell-game ...
+Preprocessing test suite 'Main' for haskell-game-0.3.0.0...
+
+on the commandline: Warning:
+    -XOverlappingInstances is deprecated: instead use per-instance pragmas OVERLAPPING/OVERLAPPABLE/OVERLAPS
+[1 of 6] Compiling HaskellGame.Datatypes ( src/HaskellGame/Datatypes.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/HaskellGame/Datatypes.o )
+[2 of 6] Compiling HaskellGame.Utils ( src/HaskellGame/Utils.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/HaskellGame/Utils.o )
+[3 of 6] Compiling HaskellGame.Graphics ( src/HaskellGame/Graphics.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/HaskellGame/Graphics.o )
+[4 of 6] Compiling HaskellGame.Battle ( src/HaskellGame/Battle.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/HaskellGame/Battle.o )
+[5 of 6] Compiling HaskellGame.Interaction ( src/HaskellGame/Interaction.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/HaskellGame/Interaction.o )
+[6 of 6] Compiling Main             ( test/Main.hs, dist/dist-sandbox-dd38424a/build/Main/Main-tmp/Main.o )
+
+on the commandline: Warning:
+    -XOverlappingInstances is deprecated: instead use per-instance pragmas OVERLAPPING/OVERLAPPABLE/OVERLAPS
+Linking dist/dist-sandbox-dd38424a/build/Main/Main ...
+Creating package registration file:
+/tmp/pkgConf-haskell-game-0.3.01497983152038664370.0
+Installing library in
+/home/inn1t-f00s/Documents/third_year/haskell/funcproglabs/CS3016-1516/Lab03/.cabal-sandbox/lib/x86_64-linux-ghc-7.10.2/haskell-game-0.3.0.0-CnDABipB74D1OEHdcTUH6b
+Installing executable(s) in
+/home/inn1t-f00s/Documents/third_year/haskell/funcproglabs/CS3016-1516/Lab03/.cabal-sandbox/bin
+Registering haskell-game-0.3.0.0...

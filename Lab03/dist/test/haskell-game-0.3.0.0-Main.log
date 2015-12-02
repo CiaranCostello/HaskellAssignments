@@ -1,0 +1,20 @@
+Test suite Main: RUNNING...
+Test Collisions:
+  Wall Collision: [OK]
+  Object Collision: [OK]
+  Player Movement: [OK]
+Test Monster Battling [90 marks]:
+  Attacking nothing works: [OK]
+  Attacking one monster works: [OK]
+  Attacking several monsters works: [OK]
+  Attacking doesn't hit monsters out of range: [OK]
+takesome and dropsome:
+  takesome works like Prelude.take: [OK, passed 100 tests]
+  dropsome works like Prelude.drop: [OK, passed 100 tests]
+
+         Properties  Test Cases  Total      
+ Passed  2           7           9          
+ Failed  0           0           0          
+ Total   2           7           9          
+Test suite Main: PASS
+Test suite logged to: dist/test/haskell-game-0.3.0.0-Main.log
