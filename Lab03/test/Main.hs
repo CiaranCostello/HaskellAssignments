@@ -14,6 +14,8 @@ import HaskellGame.Datatypes
 import HaskellGame.Utils
 import HaskellGame.Interaction
 
+import Debug.Trace as DT
+
 deriving instance Show Scene
 deriving instance Show Map
 
@@ -24,6 +26,23 @@ deriving instance Eq Tile
 deriving instance Eq Player
 
 deriving instance Ord Monster
+
+{- Displayimng entities -}
+
+displayP p
+ = "Player="
+   ++"{"++show (hitpoints p)
+   ++","++show (experience p)
+   ++","++show (stats p)
+   ++","++show (skills p)
+   ++","++show (pos p)
+   
+displayM (Dragon h a p)
+ = "Dragon="++show h++","++show a++","++show p
+displayM (Zombie h a p)
+ = "Zombie="++show h++","++show a++","++show p
+
+
 {- HUnit Tests -}
 
 test_no_collide_walls =
@@ -59,6 +78,8 @@ test_movement =
 
 {- Test that attacking works as expected -}
 
+
+
 -- Check that attacking nothing works
 test_attack_nothing =
   let theMap = "###" ++
@@ -82,13 +103,13 @@ test_attack_one =
       theScene = (Scene (createMap 3 4 theMap) thePlayer [] [theMonster] [])
       expectedPlayer = thePlayer { hitpoints = (hitpoints thePlayer) - 1 }
       expectedMonster = Dragon 17 2 (1, 2)
-      expectedMessages = [(Console.Red, "🐉 hits ☃ for 1 damage!"),
-                          (Console.Red, "☃ hits 🐉 for 3 damage!")]
-      newScene = handleInput 'a' theScene
+      expectedMessages = [(Console.Red, "D hits P for 1 damage!"),
+                          (Console.Red, "P hits D for 3 damage!")]
+      newScene = doAttack theScene -- handleInput 'a' theScene
   in do
-    expectedPlayer @=? (player newScene)
-    expectedMonster @=? (head $ monsters newScene)
-    expectedMessages @=? (messages newScene)
+    displayP expectedPlayer @=? (displayP $ player newScene)
+    displayM expectedMonster @=? (displayM $ head $ monsters newScene)
+    expectedMessages @=? messages newScene
 
 -- Check that attacking multiple monsters works as expected
 test_attack_several =
@@ -101,14 +122,15 @@ test_attack_several =
       theScene = (Scene (createMap 5 4 theMap) thePlayer [] theMonsters [])
       expectedPlayer = thePlayer { hitpoints = (hitpoints thePlayer) - 2 }
       expectedMonsters = [Dragon 17 2 (1, 1), Dragon 17 2 (3, 1)]
-      expectedMessages = [(Console.Red, "🐉 hits ☃ for 1 damage!"),
-                          (Console.Red, "☃ hits 🐉 for 3 damage!"),
-                          (Console.Red, "🐉 hits ☃ for 1 damage!"),
-                          (Console.Red, "☃ hits 🐉 for 3 damage!")]
-      newScene = handleInput 'a' theScene
+      expectedMessages = [(Console.Red, "D hits P for 1 damage!"),
+                          (Console.Red, "P hits D for 3 damage!"),
+                          (Console.Red, "D hits P for 1 damage!"),
+                          (Console.Red, "P hits D for 3 damage!")]
+      newScene = doAttack theScene --m handleInput 'a' theScene
   in do
-    expectedPlayer @=? (player newScene)
-    (List.sort expectedMonsters) @=? (List.sort $ monsters newScene) --they could be reordered so sort both first
+    displayP expectedPlayer @=? (displayP $ player newScene)
+    (List.map displayM $ List.sort expectedMonsters) 
+      @=? (List.map displayM $ List.sort $ monsters newScene) --they could be reordered so sort both first
     expectedMessages @=? (messages newScene)
 
 -- Check that attacking monsters only attacks those in range
@@ -122,12 +144,13 @@ test_attack_range =
       theScene = (Scene (createMap 5 4 theMap) thePlayer [] theMonsters [])
       expectedPlayer = thePlayer { hitpoints = (hitpoints thePlayer) - 1 }
       expectedMonsters = [Dragon 17 2 (1, 1), Dragon 20 2 (1, 3)]
-      expectedMessages = [(Console.Red, "🐉 hits ☃ for 1 damage!"),
-                          (Console.Red, "☃ hits 🐉 for 3 damage!")]
+      expectedMessages = [(Console.Red, "D hits P for 1 damage!"),
+                          (Console.Red, "P hits D for 3 damage!")]
       newScene = handleInput 'a' theScene
   in do
-    expectedPlayer @=? (player newScene)
-    (List.sort expectedMonsters) @=? (List.sort $ monsters newScene) --they could be reordered so sort both first
+    displayP expectedPlayer @=? (displayP $ player newScene)
+    (List.map displayM $ List.sort expectedMonsters) 
+      @=? (List.map displayM $ List.sort $ monsters newScene) --they could be reordered so sort both first
     expectedMessages @=? (messages newScene)
 
 
@@ -153,15 +176,16 @@ tests = [
             testCase "Player Movement" test_movement
           ],
 
-          testGroup "Test Monster Battling [90 marks]" [
-            testCase "Attacking nothing works" test_attack_nothing,
-            testCase "Attacking one monster works" test_attack_one,
-            testCase "Attacking several monsters works" test_attack_several,
-            testCase "Attacking doesn't hit monsters out of range" test_attack_range
-          ],
-
           testGroup "takesome and dropsome" [
             testProperty "takesome works like Prelude.take" prop_takesome_take,
             testProperty "dropsome works like Prelude.drop" prop_dropsome_drop
+          ],
+          
+          testGroup "\nTest Monster Battling [40 marks]" [
+            testCase "\nATTACKING nothing" test_attack_nothing,
+            testCase "\nATTACKING one monster" test_attack_one,
+            testCase "\nATTACKING several monsters" test_attack_several,
+            testCase "\nATTACKING monsters out of range" test_attack_range
           ]
+
         ]

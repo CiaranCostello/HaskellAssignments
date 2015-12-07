@@ -11,14 +11,14 @@ import HaskellGame.Utils
 {- How to display active game elements -}
 
 instance Show Player where
-  show (Player _ _ _ _ _) = "☃"
+  show (Player _ _ _ _ _) = "P"
 
 instance Show Object where
   show (Chest _) = "?"
 
 instance Show Monster where
-  show (Dragon _ _ _) = "🐉"
-  show (Zombie _ _ _) = "💀"
+  show (Dragon _ _ _) = "D"
+  show (Zombie _ _ _) = "Z"
 
 {- Displaying stats and status -}
 
