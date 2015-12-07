@@ -10,7 +10,6 @@ import Data.List (find)
 
 import HaskellGame.Datatypes
 
-
 sumStats :: [Stat] -> Int 
 sumStats [] = 0
 sumStats ((_, x):xs) = x + sumStats xs
